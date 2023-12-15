@@ -1,16 +1,17 @@
-import HeartFilled from "@/icons/HeartFilled";
-import HeartPlus from "@/icons/HeartPlus";
 import Image from "next/image";
+import FavoriteButton from "./FavoriteButton";
 export default function ProfileCard({
   name,
   image,
   email,
-  isFavorite,
+  isFavorited,
+  onFavorited,
 }: {
   name: string;
   image: string;
   email: string;
-  isFavorite?: boolean;
+  isFavorited?: boolean;
+  onFavorited?: (isFavorited: boolean) => void;
 }) {
   return (
     <div className="flex flex-col rounded-lg shadow-lg bg-white dark:bg-gray-900/60 py-10 px-8 w-[350px] items-center">
@@ -27,13 +28,10 @@ export default function ProfileCard({
       <p className="text-sm text-gray-600 dark:text-gray-400">{email}</p>
       <ul className="mt-6">
         <li>
-          <button aria-label={`Add ${name} to favorite`}>
-            {isFavorite ? (
-              <HeartFilled className="text-red-700" />
-            ) : (
-              <HeartPlus />
-            )}
-          </button>
+          <FavoriteButton
+            isFavorited={Boolean(isFavorited)}
+            aria-label={`Add ${name} to favorite`}
+          />
         </li>
       </ul>
     </div>

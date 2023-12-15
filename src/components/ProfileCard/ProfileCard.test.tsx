@@ -17,6 +17,8 @@ describe("ProfileCard", () => {
 
   it("has no accessibility violations", async () => {
     const { container } = render(<ProfileCard {...defaultProps} />);
+    // Some issue with the lib?
+    // @ts-ignore
     expect(await axe(container)).toHaveNoViolations();
   });
 });
