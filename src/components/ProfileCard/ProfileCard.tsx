@@ -1,35 +1,51 @@
 import Image from "next/image";
 import FavoriteButton from "./FavoriteButton";
-export default function ProfileCard({
-  name,
-  image,
-  email,
-  isFavorited,
-  onFavorited,
-}: {
-  name: string;
-  image: string;
-  email: string;
-  isFavorited?: boolean;
-  onFavorited?: (isFavorited: boolean) => void;
-}) {
+import {
+  formatDistanceToNowStrict,
+  format,
+  isPast,
+  addYears,
+  setYear,
+  isToday,
+  endOfDay,
+} from "date-fns";
+import { Profile } from "@/types/Profile";
+export default function ProfileCard({ profile }: { profile: Profile }) {
+  const { name, picture, dob } = profile;
+  let birthdayDate = setYear(new Date(dob.date), new Date().getFullYear());
+  if (isPast(endOfDay(birthdayDate))) {
+    birthdayDate = new Date(addYears(birthdayDate, 1));
+  }
+  const timeToBirthday = formatDistanceToNowStrict(birthdayDate, {
+    unit: "day",
+    addSuffix: true,
+  });
+
   return (
-    <div className="flex flex-col rounded-lg shadow-lg bg-white dark:bg-gray-900/60 py-10 px-8 w-[350px] items-center">
-      <div className="">
-        <Image
-          src={image}
-          alt={name}
-          width={250}
-          height={250}
-          className="rounded-full"
-        />
-      </div>
-      <h3 className="mt-6 font-semibold">{name}</h3>
-      <p className="text-sm text-gray-600 dark:text-gray-400">{email}</p>
+    <div
+      data-testid="ProfileCard"
+      className="flex flex-col rounded-lg shadow-lg bg-white dark:bg-gray-900/60 py-10 px-8 w-[350px] items-center"
+    >
+      <Image
+        src={picture.large}
+        alt={`${name.first} ${name.last}`}
+        width={250}
+        height={250}
+        className="rounded-full"
+        placeholder="blur"
+        blurDataURL={picture.thumbnail}
+      />
+      <h3 className="mt-6 font-semibold">{`${name.first} ${name.last}`}</h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400">
+        🎂{" "}
+        {isToday(birthdayDate)
+          ? "Today"
+          : `${format(birthdayDate, "do MMMM")} • ${timeToBirthday} days`}
+      </p>
       <ul className="mt-6">
         <li>
           <FavoriteButton
-            isFavorited={Boolean(isFavorited)}
+            profile={profile}
             aria-label={`Add ${name} to favorite`}
           />
         </li>

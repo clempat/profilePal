@@ -1,10 +1,10 @@
-interface GenerateInputProps {
-  action: (FormData: any) => void;
-}
+import { ComponentProps } from "react";
 
-export default function GenrateInput({ action }: GenerateInputProps) {
+interface GenerateInputProps extends ComponentProps<"form"> {}
+
+export default function GenrateInput(props: GenerateInputProps) {
   return (
-    <form action={action} className="w-full">
+    <form {...props} className="w-full">
       <label
         htmlFor="generate"
         className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"

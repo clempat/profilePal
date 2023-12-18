@@ -5,7 +5,9 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/icons/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "media",
   theme: {
     extend: {
       backgroundImage: {
@@ -33,7 +35,7 @@ const config: Config = {
         },
         swipeOut: {
           from: { transform: "translateX(var(--radix-toast-swipe-end-x))" },
-          to: { transform: "translateX(calc(100% + 25px)" },
+          to: { transform: "translateX(calc(100% + 25px))" },
         },
       },
       animation: {

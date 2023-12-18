@@ -57,7 +57,7 @@ export default function Notification({
   return (
     <Toast.Root
       className={twMerge(
-        "flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800",
+        "mb-2 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800",
         "data-[state=open]:animate-slideIn", // Slide in
         "data-[swipe=move]transform data-[swipe=move]:translate-x-[--radix-toast-swipe-move-x]", // Move
         "data-[swipe=cancel]:transform data-[swipe=cancel]:animate-toastCancel data-[swipe=cancel]:translate-x-0 data-[swipe=cancel]:transition-transform data-[swipe=cancel]:duration-200 data-[swipe=cancel]:ease-out", // Cancel
@@ -72,7 +72,7 @@ export default function Notification({
         {renderIcon(type)}
         <span className="sr-only">{type} icon</span>
       </div>
-      <div className="ms-3 text-sm font-normal">Set yourself free.</div>
+      <div className="ms-3 text-sm font-normal">{message}</div>
       <Toast.Action asChild altText="Close">
         <button
           type="button"
