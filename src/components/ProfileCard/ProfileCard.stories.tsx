@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { faker } from "@faker-js/faker";
 
 import ProfileCard from "./ProfileCard";
-import { action } from "@storybook/addon-actions";
 
 const meta: Meta<typeof ProfileCard> = {
   title: "🧩 Components/Profile Card",
